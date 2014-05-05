@@ -1,3 +1,6 @@
 submit_challenge
 test_challenge
-*source_pkg.tgz
+**/source_pkg.tgz
+08/solve-maps.rb
+08/output-err.txt
+10/*
