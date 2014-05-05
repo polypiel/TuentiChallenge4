@@ -1,6 +1,9 @@
 submit_challenge
 test_challenge
 **/source_pkg.tgz
+01/students.gz
+06/mitm*
+07/phone_call.log*
 08/solve-maps.rb
 08/output-err.txt
 10/*
