@@ -30,6 +30,20 @@ class State
 	def hash
 		@table.hash
 	end
+
+	# Returns all possible new configurations from a given state
+	def moves
+		[
+			State.new([table[0], table[1], table[2], table[3], table[4], table[5], table[7], table[6]], n_moves+1),
+			State.new([table[0], table[1], table[2], table[3], table[4], table[6], table[5], table[7]], n_moves+1),
+			State.new([table[0], table[1], table[2], table[5], table[4], table[3], table[6], table[7]], n_moves+1),
+			State.new([table[3], table[1], table[2], table[0], table[4], table[5], table[6], table[7]], n_moves+1),
+			State.new([table[1], table[0], table[2], table[3], table[4], table[5], table[6], table[7]], n_moves+1),
+			State.new([table[0], table[2], table[1], table[3], table[4], table[5], table[6], table[7]], n_moves+1),
+			State.new([table[0], table[1], table[4], table[3], table[2], table[5], table[6], table[7]], n_moves+1),
+			State.new([table[0], table[1], table[2], table[3], table[7], table[5], table[6], table[4]], n_moves+1),
+		]
+	end
 end
 
 # Maps people names to numbers
@@ -43,20 +57,6 @@ def change_names(map, names, target)
 			$id += 1
 	  end
   end
-end
-
-# Returns all possible new configurations from a given state
-def moves(a)
-	[
-		State.new([a.table[0], a.table[1], a.table[2], a.table[3], a.table[4], a.table[5], a.table[7], a.table[6]], a.n_moves+1),
-		State.new([a.table[0], a.table[1], a.table[2], a.table[3], a.table[4], a.table[6], a.table[5], a.table[7]], a.n_moves+1),
-		State.new([a.table[0], a.table[1], a.table[2], a.table[5], a.table[4], a.table[3], a.table[6], a.table[7]], a.n_moves+1),
-		State.new([a.table[3], a.table[1], a.table[2], a.table[0], a.table[4], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
-		State.new([a.table[1], a.table[0], a.table[2], a.table[3], a.table[4], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
-		State.new([a.table[0], a.table[2], a.table[1], a.table[3], a.table[4], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
-		State.new([a.table[0], a.table[1], a.table[4], a.table[3], a.table[2], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
-		State.new([a.table[0], a.table[1], a.table[2], a.table[3], a.table[7], a.table[5], a.table[6], a.table[4]], a.n_moves+1),
-	]
 end
 
 # Finds a solution with a BFT algorithm
