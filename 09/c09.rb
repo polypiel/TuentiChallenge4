@@ -162,7 +162,7 @@ class Link
 	end
 end
 
-# Only debug purposes
+# Only for debugging purposes
 def print_path(path)
 	if not path.empty?
 		print path[0]
