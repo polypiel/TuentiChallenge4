@@ -12,8 +12,9 @@
 if __FILE__ == $0
   cases = ARGF.readline.to_i
   cases.times do |i|
-	x, y = ARGF.readline.split.map {|x| x.to_i}
-	gamble = Math.sqrt(x*x + y*y).round(2)
-	puts "#{gamble}"
+		x, y = ARGF.readline.split.map {|x| x.to_i}
+		# sqrt(x² + y²)
+		gamble = Math.sqrt(x*x + y*y).round(2)
+		puts "#{gamble}"
   end
 end

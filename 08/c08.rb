@@ -11,11 +11,8 @@
 require "set"
 
 TABLE_SIZE = 8
-IGNORE_INDEX = 4
-
 SEP = ", "
 NO_SOLUTION = -1
-MAX = (2**(0.size * 8 -2) -1)
 
 
 class State
@@ -35,6 +32,7 @@ class State
 	end
 end
 
+# Maps people names to numbers
 def change_names(map, names, target)
   names.each_with_index do |name, j|
 	  if map[name]
@@ -47,6 +45,7 @@ def change_names(map, names, target)
   end
 end
 
+# Returns all possible new configurations from a given state
 def moves(a)
 	[
 		State.new([a.table[0], a.table[1], a.table[2], a.table[3], a.table[4], a.table[5], a.table[7], a.table[6]], a.n_moves+1),
@@ -57,26 +56,16 @@ def moves(a)
 		State.new([a.table[0], a.table[2], a.table[1], a.table[3], a.table[4], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
 		State.new([a.table[0], a.table[1], a.table[4], a.table[3], a.table[2], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
 		State.new([a.table[0], a.table[1], a.table[2], a.table[3], a.table[7], a.table[5], a.table[6], a.table[4]], a.n_moves+1),
-
-		# State.new([a.table[2], a.table[1], a.table[0], a.table[3], a.table[4], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
-		# State.new([a.table[0], a.table[1], a.table[7], a.table[3], a.table[4], a.table[5], a.table[6], a.table[2]], a.n_moves+1),
-		# State.new([a.table[0], a.table[1], a.table[2], a.table[3], a.table[4], a.table[7], a.table[6], a.table[5]], a.n_moves+1),
-		# State.new([a.table[5], a.table[1], a.table[2], a.table[3], a.table[4], a.table[0], a.table[6], a.table[7]], a.n_moves+1)
-
-		# State.new([a.table[0], a.table[6], a.table[2], a.table[3], a.table[4], a.table[5], a.table[1], a.table[7]], a.n_moves+1),
-		# State.new([a.table[0], a.table[1], a.table[2], a.table[4], a.table[3], a.table[5], a.table[6], a.table[7]], a.n_moves+1),
 	]
 end
 
+# Finds a solution with a BFT algorithm
 def solve(a, b)
 	unvisited_queque = [State.new(a)]
 	unvisited_set = Set.new unvisited_queque
 	visited = Set.new
 
-	best = nil
-	iters = 0
 	while not unvisited_queque.empty?
-		# c = unvisited_queque.shift
 		c = unvisited_queque[0]
 		unvisited_queque.delete_at 0
 		unvisited_set.delete(c)
@@ -87,11 +76,8 @@ def solve(a, b)
 		unvisited_set.merge(neighbours)
 
 		visited << c
-		iters += 1
-
-		#puts "#{visited.length}, #{unvisited.length}" if iters % 1000 == 0
 	end
-	best || NO_SOLUTION
+	NO_SOLUTION
 end
 
 # Main block
@@ -119,7 +105,7 @@ if __FILE__ == $0
 		change_names(names_map, aux, final_tables[i])
   end
 
- 	expected = [10, 10, 8, 7, 8, 7, 8, 4, 7, 10]
+ 	# expected = [10, 10, 8, 7, 8, 7, 8, 4, 7, 10]
  	# Solves it
  	t1 = Time.now
  	#puts "Sol\tExpected"
@@ -131,8 +117,4 @@ if __FILE__ == $0
   t2 = Time.now - t1
   #puts "Time: #{t2}s"
   #puts "Estimated: #{(t2*80)/60}m"
-
-   # n_tables.times do
-   # 	puts 5
-   # end
 end

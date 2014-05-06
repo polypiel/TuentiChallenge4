@@ -41,7 +41,7 @@ def insert_node(tree, student)
   studiesNode << student["name"]
 end
 
-# Finds a anonym student
+# Finds a anonymous student
 def find_node(tree, filter)
   names = nil
   if tree[filter["gender"]] and tree[filter["gender"]][filter["year"]] and tree[filter["gender"]][filter["year"]][filter["age"]] and tree[filter["gender"]][filter["year"]][filter["age"]][filter["studies"]]
@@ -54,11 +54,11 @@ end
 def build_db(db_file)
   root = Hash.new
   File.open(db_file, "r") do |f|
-	f.each_line do |line|
-	  parts = line.split(",")
-	  student = {"name" => parts[0], "gender" => parts[1], "age" => parts[2], "studies" => parts[3], "year" => parts[4]}
-	  insert_node(root, student)
-	end
+  	f.each_line do |line|
+  	  parts = line.split(",")
+  	  student = {"name" => parts[0], "gender" => parts[1], "age" => parts[2], "studies" => parts[3], "year" => parts[4]}
+  	  insert_node(root, student)
+  	end
   end
   root
 end

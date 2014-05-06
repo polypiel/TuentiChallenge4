@@ -8,6 +8,8 @@
 # Angel Calvo
 #######################################
 
+# DO NOT WORK!
+
 require "socket"
 require "openssl"
 

@@ -20,16 +20,16 @@ def add_contact_A(a, b)
   toDoSet << a if $A_graph.include? b
   
   while not toDoSet.empty?
-	n = toDoSet.take(1)[0]
-	toDoSet.delete n
-	
-	unless $A_graph.include?(n)
-	  neighbours = $graph[n] || []
-	  neighbours.each do |neighbour|
-		toDoSet << neighbour unless $A_graph.include?(neighbour)
-	  end
-	  $A_graph << n
-	end
+		n = toDoSet.take(1)[0]
+		toDoSet.delete n
+		
+		unless $A_graph.include?(n)
+		  neighbours = $graph[n] || []
+		  neighbours.each do |neighbour|
+			toDoSet << neighbour unless $A_graph.include?(neighbour)
+		  end
+		  $A_graph << n
+		end
   end
 end
 
@@ -53,18 +53,18 @@ if __FILE__ == $0
   $A_graph = Set.new [A]
   
   File.open(CALLS_FILE, "r") do |f|
-	f.each_line do |line|
-	  from, to = line.split(" ").map {|x| x.to_i}
-	  add_contact(from, to)
-	  
-	  add_contact_A(from, to)
+		f.each_line do |line|
+		  from, to = line.split(" ").map {|x| x.to_i}
+		  add_contact(from, to)
+		  
+		  add_contact_A(from, to)
 
-	  if $A_graph.include?(B)
-		#puts "#{Time.now - tstart}s"
-		puts "Connected at #{f.lineno - 1}"
-		exit()
-	  end
-	end
+		  if $A_graph.include?(B)
+				#puts "#{Time.now - tstart}s"
+				puts "Connected at #{f.lineno - 1}"
+				exit()
+			end
+		end
   end
   #puts "#{Time.now - tstart}s"
   puts "Not connected"

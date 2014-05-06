@@ -13,22 +13,21 @@ require "set"
 def is_transition(from, to)
   diff = 0
   for i in 0..(from.length - 1)
-	diff += 1 if from[i] != to[i]
+	 diff += 1 if from[i] != to[i]
   end
-  return diff == 1
+  diff == 1
 end
 
 def build_transitions(from_states, to_states)
   transitions = {}
   from_states.each do |f|
-	to_states.each do |t|
-	  if is_transition(f,t)
-		transitions[f] = Set.new unless transitions[f]
-		transitions[f] << t
-	  end
-	end
+  	to_states.each do |t|
+  	  if is_transition(f,t)
+    		transitions[f] = Set.new unless transitions[f]
+    		transitions[f] << t
+  	  end
+  	end
   end
-  #puts "#{transitions}"
   transitions
 end
 
@@ -55,21 +54,21 @@ end
 # Finds the solution
 def find(current, path)
   if is_solution(current)
-	update_solution(path << current)
+	 update_solution(path << current)
   end
   depth = path.length + 1
   $visited[current] = depth
   unless worse(depth)  # prune if current path is worse than current solution
-	t = $transitions[current] || []
-	t.each do |child|
-	  find(child, path << current) unless is_visited(child, depth + 1) 
-	end
+  	t = $transitions[current] || []
+  	t.each do |child|
+  	  find(child, path << current) unless is_visited(child, depth + 1) 
+  	end
   end
 end
 
 # Main block
 if __FILE__ == $0
-  tstart = Time.now
+  #tstart = Time.now
   
   initial = ARGF.readline.chomp
   $final = ARGF.readline.chomp
@@ -79,13 +78,12 @@ if __FILE__ == $0
   end
   
   $transitions = build_transitions(Array.new(states) << initial, Array.new(states) << $final)
-  #puts "#{$transitions}"
   
-  $visited = {} #$initial => 1}
+  $visited = {}
   $solution = nil
   
   find(initial, [])
-  time = Time.now - tstart
+  #time = Time.now - tstart
   
   puts $solution.join("->") if $solution
   #puts "#{time}s"
