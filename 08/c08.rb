@@ -71,7 +71,7 @@ def solve(a, b)
 		unvisited_set.delete(c)
 
 		return c.n_moves if c.table == b
-		neighbours = moves(c).select { |x| not visited.include? x and not unvisited_set.include? x}
+		neighbours = c.moves.select { |x| not visited.include? x and not unvisited_set.include? x}
 		unvisited_queque.concat(neighbours)
 		unvisited_set.merge(neighbours)
 
@@ -86,10 +86,12 @@ if __FILE__ == $0
   initial_tables = Array.new(n_tables) {Array.new(TABLE_SIZE)}
   final_tables = Array.new(n_tables) {Array.new(TABLE_SIZE)}
   
-  $id = 1
-  names_map = Hash.new
+  
   
   n_tables.times do |i|
+  	$id = 1
+  	names_map = Hash.new
+
 		ARGF.readline
 		aux = Array.new(TABLE_SIZE)
 		aux[0], aux[1], aux[2] = ARGF.readline.chomp.split(SEP)
