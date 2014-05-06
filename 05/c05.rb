@@ -30,10 +30,10 @@ end
 
 def print_matrix(matrix)
   matrix.each do |row|
-	row.each do |value|
-	  print value ? ALIVE : DEAD
-	end
-	print "\n"
+		row.each do |value|
+		  print value ? ALIVE : DEAD
+		end
+		print "\n"
   end
 end
 
