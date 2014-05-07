@@ -34,14 +34,14 @@ class State
 	# Returns all possible new configurations from a given state
 	def moves
 		[
-			State.new([table[0], table[1], table[2], table[3], table[4], table[5], table[7], table[6]], n_moves+1),
-			State.new([table[0], table[1], table[2], table[3], table[4], table[6], table[5], table[7]], n_moves+1),
-			State.new([table[0], table[1], table[2], table[5], table[4], table[3], table[6], table[7]], n_moves+1),
-			State.new([table[3], table[1], table[2], table[0], table[4], table[5], table[6], table[7]], n_moves+1),
-			State.new([table[1], table[0], table[2], table[3], table[4], table[5], table[6], table[7]], n_moves+1),
-			State.new([table[0], table[2], table[1], table[3], table[4], table[5], table[6], table[7]], n_moves+1),
-			State.new([table[0], table[1], table[4], table[3], table[2], table[5], table[6], table[7]], n_moves+1),
-			State.new([table[0], table[1], table[2], table[3], table[7], table[5], table[6], table[4]], n_moves+1),
+			State.new([@table[0], @table[1], @table[2], @table[3], @table[4], @table[5], @table[7], @table[6]], @n_moves+1),
+			State.new([@table[0], @table[1], @table[2], @table[3], @table[4], @table[6], @table[5], @table[7]], @n_moves+1),
+			State.new([@table[0], @table[1], @table[2], @table[5], @table[4], @table[3], @table[6], @table[7]], @n_moves+1),
+			State.new([@table[3], @table[1], @table[2], @table[0], @table[4], @table[5], @table[6], @table[7]], @n_moves+1),
+			State.new([@table[1], @table[0], @table[2], @table[3], @table[4], @table[5], @table[6], @table[7]], @n_moves+1),
+			State.new([@table[0], @table[2], @table[1], @table[3], @table[4], @table[5], @table[6], @table[7]], @n_moves+1),
+			State.new([@table[0], @table[1], @table[4], @table[3], @table[2], @table[5], @table[6], @table[7]], @n_moves+1),
+			State.new([@table[0], @table[1], @table[2], @table[3], @table[7], @table[5], @table[6], @table[4]], @n_moves+1),
 		]
 	end
 end
