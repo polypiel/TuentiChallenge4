@@ -59,23 +59,19 @@ def change_names(map, names, target)
   end
 end
 
-# Finds a solution with a BFT algorithm
-def solve(a, b)
-	unvisited_queque = [State.new(a)]
-	unvisited_set = Set.new unvisited_queque
-	visited = Set.new
+# Finds a solution with a BFS algorithm
+def solve_bfs(a, b)
+	unvisited = [State.new(a)]
+	visited = Set.new unvisited
 
-	while not unvisited_queque.empty?
-		c = unvisited_queque[0]
-		unvisited_queque.delete_at 0
-		unvisited_set.delete(c)
+	while not unvisited.empty?
+		c = unvisited[0]
+		unvisited.delete_at 0
 
 		return c.n_moves if c.table == b
-		neighbours = c.moves.select { |x| not visited.include? x and not unvisited_set.include? x}
-		unvisited_queque.concat(neighbours)
-		unvisited_set.merge(neighbours)
-
-		visited << c
+		neighbours = c.moves.select { |x| not visited.include? x }
+		unvisited.concat(neighbours)
+		visited.merge neighbours
 	end
 	NO_SOLUTION
 end
@@ -107,16 +103,16 @@ if __FILE__ == $0
 		change_names(names_map, aux, final_tables[i])
   end
 
- 	# expected = [10, 10, 8, 7, 8, 7, 8, 4, 7, 10]
+ 	#expected = [10, 10, 8, 7, 8, 7, 8, 4, 7, 10]
  	# Solves it
- 	t1 = Time.now
- 	#puts "Sol\tExpected"
+ 	#t1 = Time.now
+ 	#puts "Sol.\tExp."
   n_tables.times do |i|
-  	move = solve(initial_tables[i], final_tables[i])
-  	#puts "#{move}\t#{expected[i]}\t#{move==expected[i] ? 'OK' : 'WRONG'}" #\t#{move.path}"
+  	move = solve_bfs(initial_tables[i], final_tables[i])
+  	#puts "#{move}\t#{expected[i]}\t#{move==expected[i] ? 'OK' : 'WRONG'}"
   	puts move
   end
-  t2 = Time.now - t1
+  #t2 = Time.now - t1
   #puts "Time: #{t2}s"
   #puts "Estimated: #{(t2*80)/60}m"
 end
